@@ -422,7 +422,7 @@ Key.on('c', CONTROL_SHIFT, function(){
   App.launch('Chrome').focus();
 })
 
-Key.on('s', CONTROL_SHIFT, function(){
+Key.on('d', CONTROL_SHIFT, function(){
   App.launch('Vanilla');
 })
 
