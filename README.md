@@ -12,8 +12,8 @@ Based on [Kasper's configuration](https://github.com/kasper/.config/blob/master/
 | CTRL+SHIFT + a | move window to SOUTH WEST |
 | CTRL+SHIFT + s | move window to SOUTH EAST |
 | CTRL+SHIFT + h | switch window focus to closest window to the west |
-| CTRL+SHIFT + j | switch window focus to closest window to the north|
-| CTRL+SHIFT + k | switch window focus to closest window to the south|
+| CTRL+SHIFT + j | switch window focus to closest window to the south|
+| CTRL+SHIFT + k | switch window focus to closest window to the north|
 | CTRL+SHIFT + l | switch window focus to closest window to the east |
 | CTRL+SHIFT + right arrow | move app into space to the right of the current space|
 | CTRL+SHIFT + left arrow | move app into space to the left of the current space|
