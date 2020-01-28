@@ -20,7 +20,7 @@ Based on [Kasper's configuration](https://github.com/kasper/.config/blob/master/
 | CTRL+SHIFT + / | resize window to half in height |
 | CTRL+SHIFT + t | open Iterm |
 | CTRL+SHIFT + x | open Google Chrome |
-| CTRL+SHIFT + s | open Vanilla App |
+| CTRL+SHIFT + d | open Vanilla App |
 
 ## Todos
 [x] Move app between spaces 
