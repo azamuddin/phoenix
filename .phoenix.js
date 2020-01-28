@@ -1,7 +1,7 @@
 // Preferences
 Phoenix.set({
   daemon: true,
-  openAtLogin: false,
+  openAtLogin: true,
 });
 
 // Run this on about to close phoenix
@@ -414,4 +414,62 @@ Key.on('/', CONTROL_SHIFT, function(){
   })
 })
 
+Key.on('t', CONTROL_SHIFT, function(){
+  App.launch('Iterm').focus();
+})
 
+Key.on('c', CONTROL_SHIFT, function(){
+  App.launch('Chrome').focus();
+})
+
+Key.on('s', CONTROL_SHIFT, function(){
+  App.launch('Vanilla');
+})
+
+
+/**
+ * Move window to space on the right 
+ */
+Key.on('right', CONTROL_SHIFT, function(){
+
+  const window = 
+    Window.focused();
+
+  const space = 
+    Space.active();
+
+  if(!window || !space) return;
+
+  const nextSpace = 
+    space.next();
+
+  space.removeWindows([window]);
+  nextSpace.addWindows([window]);
+
+  window.focus();
+
+});
+
+
+/**
+ * Move window to space on the left 
+ */
+Key.on('left', CONTROL_SHIFT, function(){
+  
+  const window = 
+    Window.focused();
+
+  const space = 
+    Space.active();
+
+  if(!window || !space) return;
+
+  const previousSpace = 
+    space.previous();
+
+  space.removeWindows([window]);
+  previousSpace.addWindows([window]);
+
+  window.focus();
+
+})
