@@ -17,6 +17,7 @@ Based on [Kasper's configuration](https://github.com/kasper/.config/blob/master/
 | CTRL+SHIFT + l | switch window focus to closest window to the east |
 | CTRL+SHIFT + right arrow | move app into space to the right of the current space|
 | CTRL+SHIFT + left arrow | move app into space to the left of the current space|
+| CTRL+SHIFT + / | resize window to half in height |
 | CTRL+SHIFT + t | open Iterm |
 | CTRL+SHIFT + x | open Google Chrome |
 | CTRL+SHIFT + s | open Vanilla App |
