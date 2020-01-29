@@ -124,6 +124,7 @@ class ChainWindow {
   // Maximise to fill whole screen
   maximise() {
     const { parent, margin } = this;
+
     this.frame.width = parent.width - (2 * margin);
     this.frame.height = parent.height - (2 * margin);
     return this;
@@ -313,6 +314,8 @@ Key.on('<', CONTROL_SHIFT, () => {
 /** toggle max screen **/
 Key.on('f', CONTROL_SHIFT, () => {
 
+  const margin = 10;
+
   const window = 
     Window.focused();
 
@@ -337,7 +340,10 @@ Key.on('f', CONTROL_SHIFT, () => {
       height: screen.height
     }
 
-  if(window && window.size().width !== screenSize.width && window.size().height !== screenSize.height){
+  if(window 
+    && (window.size().width !== screenSize.width - (1*margin) - 3 
+      || window.size().height !== screenSize.height - (2*margin) - 8 ) 
+  ){
 
     lastPositions[windowId] = 
       {x: window.topLeft().x, y: window.topLeft().y, width: window.size().width, height: window.size().height}
@@ -345,11 +351,16 @@ Key.on('f', CONTROL_SHIFT, () => {
     Storage.set('lastPositions', lastPositions)
 
     window.setTopLeft({
-      x: 0,
-      y: 0
+      x: 10, 
+      y: 32
     })
 
-    window.setSize(screenSize);
+    window.setSize({
+      width: screenSize.width - (1 * margin), 
+      height: screenSize.height - (2 * margin)
+    })
+
+
     return;
   }
 
@@ -473,3 +484,5 @@ Key.on('left', CONTROL_SHIFT, function(){
   window.focus();
 
 })
+
+
