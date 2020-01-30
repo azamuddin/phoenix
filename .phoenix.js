@@ -5,7 +5,7 @@ Phoenix.set({
 });
 
 // Run this on about to close phoenix
-new Event('willTerminate', () => {
+var onTerminate = new Event('willTerminate', () => {
    Storage.remove('lastPositions');
 })
 
@@ -314,6 +314,7 @@ Key.on('<', CONTROL_SHIFT, () => {
 /** toggle max screen **/
 Key.on('f', CONTROL_SHIFT, () => {
 
+
   const margin = 10;
 
   const window = 
@@ -324,7 +325,6 @@ Key.on('f', CONTROL_SHIFT, () => {
 
   const screen = 
      Screen.main().flippedVisibleFrame();
-
 
   let lastPositions = 
     Storage.get('lastPositions') || {}; 
@@ -340,9 +340,12 @@ Key.on('f', CONTROL_SHIFT, () => {
       height: screen.height
     }
 
+
+  const heightDiff = (screen.height - (2*margin)) - window.size().height;
+
   if(window 
-    && (window.size().width !== screenSize.width - (1*margin) - 3 
-      || window.size().height !== screenSize.height - (2*margin) - 8 ) 
+    && (window.size().width + margin !== screenSize.width 
+      || window.size().height + (2*margin) + heightDiff) !== screenSize.height 
   ){
 
     lastPositions[windowId] = 
@@ -351,15 +354,14 @@ Key.on('f', CONTROL_SHIFT, () => {
     Storage.set('lastPositions', lastPositions)
 
     window.setTopLeft({
-      x: 10, 
-      y: 32
+      x: margin, 
+      y: screen.y + margin 
     })
 
     window.setSize({
-      width: screenSize.width - (1 * margin), 
-      height: screenSize.height - (2 * margin)
+      width: screenSize.width, 
+      height: screenSize.height - (2*margin)
     })
-
 
     return;
   }
