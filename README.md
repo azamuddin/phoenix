@@ -18,6 +18,9 @@ Based on [Kasper's configuration](https://github.com/kasper/.config/blob/master/
 | CTRL+SHIFT + right arrow | move app into space to the right of the current space|
 | CTRL+SHIFT + left arrow | move app into space to the left of the current space|
 | CTRL+SHIFT + / | resize window to half in height |
+| CTRL+SHIFT + ; | decrease height of a window |
+| CTRL+SHIFT + ' | increase height of a window |
+| **misc** | Below are list of bindings you might want to remove or change according to your need |
 | CTRL+SHIFT + t | open Iterm |
 | CTRL+SHIFT + x | open Google Chrome |
 | CTRL+SHIFT + d | open Vanilla App |
