@@ -81,7 +81,7 @@ class ChainWindow {
         break;
       case NE:
       case SE:
-        this.frame.x = parent.x + difference.width ;
+        this.frame.x = parent.x + difference.width - margin ;
         break;
       case CENTRE:
         this.frame.x = parent.x + (difference.width / 2);
