@@ -4,6 +4,11 @@ Phoenix.set({
   openAtLogin: true,
 });
 
+Event.on('willTerminate', () => {
+  Storage.remove('lastPositions');
+  Storage.remove('maxHeight');
+})
+
 // Run this on about to close phoenix
 var onTerminate = new Event('willTerminate', () => {
    Storage.remove('lastPositions');
@@ -314,11 +319,13 @@ Key.on('<', CONTROL_SHIFT, () => {
 /** toggle max screen **/
 Key.on('f', CONTROL_SHIFT, () => {
 
-
-  const margin = 10;
-
   const window = 
     Window.focused();
+
+  if(!window) return;
+
+  const margin =
+    window.chain().margin;
 
   const windowId =
     window.hash();
@@ -334,19 +341,13 @@ Key.on('f', CONTROL_SHIFT, () => {
        {x: window.topLeft().x, y: window.topLeft().y, width: window.size().width, height: window.size().height}
    }
 
-  const screenSize = 
-    {
-      width: screen.width, 
-      height: screen.height
-    }
+  const maxHeight =
+    Storage.get('maxHeight') || screen.height - (2*margin);
 
+  const maxWidth =
+    Storage.get('maxWidth') || screen.width - (margin);
 
-  const heightDiff = (screen.height - (2*margin)) - window.size().height;
-
-  if(window 
-    && (window.size().width + margin !== screenSize.width 
-      || window.size().height + (2*margin) + heightDiff) !== screenSize.height 
-  ){
+  if(window.size().width !== maxWidth || window.size().height !== maxHeight){
 
     lastPositions[windowId] = 
       {x: window.topLeft().x, y: window.topLeft().y, width: window.size().width, height: window.size().height}
@@ -355,22 +356,27 @@ Key.on('f', CONTROL_SHIFT, () => {
 
     window.setTopLeft({
       x: margin, 
-      y: screen.y + margin 
+      y: screen.y + margin,
     })
 
     window.setSize({
-      width: screenSize.width, 
-      height: screenSize.height - (2*margin)
+      height: maxHeight, 
+      width: maxWidth 
     })
+
+    Storage.set('maxHeight', window.size().height);
+    Storage.set('maxWidth', window.size().width);
 
     return;
   }
 
   if(window){
+
     window.setSize({
       width: lastPositions[windowId].width,
       height: lastPositions[windowId].height,
     });
+
     window.setTopLeft({
       x: lastPositions[windowId].x,
       y: lastPositions[windowId].y
@@ -414,7 +420,6 @@ Key.on('l', CONTROL_SHIFT, function(){
      window.focusClosestNeighbor(EAST)
    }
 })
-
 
 Key.on('/', CONTROL_SHIFT, function(){
 
