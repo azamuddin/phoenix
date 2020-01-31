@@ -9,11 +9,6 @@ Event.on('willTerminate', () => {
   Storage.remove('maxHeight');
 })
 
-// Run this on about to close phoenix
-var onTerminate = new Event('willTerminate', () => {
-   Storage.remove('lastPositions');
-})
-
 // Globals
 const HIDDEN_DOCK_MARGIN = 3;
 const INCREMENT = 0.05;
