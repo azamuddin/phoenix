@@ -7,6 +7,7 @@ Based on [Kasper's configuration](https://github.com/kasper/.config/blob/master/
 
 | shortcut  | description|
 ----        |---         |
+| CTRL+SHIFT + f | toggle maxscreen |
 | CTRL+SHIFT + q | move window to NORTH WEST |
 | CTRL+SHIFT + w | move window to NORTH EAST |
 | CTRL+SHIFT + a | move window to SOUTH WEST |
