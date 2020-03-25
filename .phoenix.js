@@ -311,6 +311,13 @@ Key.on('<', CONTROL_SHIFT, () => {
 });
 
 
+Key.on('x', CONTROL_SHIFT, () => {
+  Phoenix.log(Window.focused().screen().identifier());
+  Phoenix.log(Window.focused().topLeft().x);
+  Phoenix.log(Window.focused().screen().flippedVisibleFrame().x)
+})
+
+
 /** toggle max screen **/
 Key.on('f', CONTROL_SHIFT, () => {
 
@@ -326,7 +333,7 @@ Key.on('f', CONTROL_SHIFT, () => {
     window.hash();
 
   const screen = 
-     Screen.main().flippedVisibleFrame();
+    window.screen().flippedVisibleFrame()
 
   let lastPositions = 
     Storage.get('lastPositions') || {}; 
@@ -350,14 +357,14 @@ Key.on('f', CONTROL_SHIFT, () => {
     Storage.set('lastPositions', lastPositions)
 
     window.setTopLeft({
-      x: margin, 
+      x: screen.x + margin, 
       y: screen.y + margin,
     })
 
     window.setSize({
-      height: maxHeight, 
-      width: maxWidth 
-    })
+      height: screen.height - (2*margin), 
+      width: screen.width - (1.6 * margin) 
+    });
 
     Storage.set('maxHeight', window.size().height);
     Storage.set('maxWidth', window.size().width);
@@ -486,5 +493,3 @@ Key.on('left', CONTROL_SHIFT, function(){
   window.focus();
 
 })
-
-
