@@ -9,6 +9,20 @@ Event.on('willTerminate', () => {
   Storage.remove('maxHeight');
 })
 
+function frameRatio(a, b){
+  const widthRatio = b.width / a.width;
+  const heightRatio = b.height / a.height;
+
+  return ({width, height, x, y}) => {
+    width = Math.round(width * widthRatio);
+    height = Math.round(height * heightRatio);
+    x = Math.round(b.x + (x - a.x) * widthRatio);
+    y = Math.round(b.y + (y - a.y) * heightRatio);
+
+    return {width, height, x, y};
+  };
+}
+
 // Globals
 const HIDDEN_DOCK_MARGIN = 3;
 const INCREMENT = 0.05;
@@ -311,10 +325,26 @@ Key.on('<', CONTROL_SHIFT, () => {
 });
 
 
-Key.on('x', CONTROL_SHIFT, () => {
-  Phoenix.log(Window.focused().screen().identifier());
-  Phoenix.log(Window.focused().topLeft().x);
-  Phoenix.log(Window.focused().screen().flippedVisibleFrame().x)
+Key.on('.', CONTROL_SHIFT, () => {
+  const window = Window.focused();
+  if(!window){
+    return 
+  }
+
+  const oldScreen = window.screen(); 
+  const newScreen = oldScreen.next(); 
+
+  if(oldScreen.isEqual(newScreen)){
+     return; 
+  }
+
+  const ratio = frameRatio(
+     oldScreen.flippedVisibleFrame(), 
+     newScreen.flippedVisibleFrame(),
+  )
+
+  window.setFrame(ratio(window.frame()));
+  
 })
 
 
